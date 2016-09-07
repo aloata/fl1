@@ -58,6 +58,8 @@ public class PlayerConnectionListener implements Listener {
         //with the offline uuid this makes it possible to set the skin then
         PendingConnection connection = loginEvent.getConnection();
         String username = connection.getName();
+
+        plugin.getLogger().fine("CHECK ONLINE_MODE");
         if (connection.isOnlineMode()) {
             String ip = connection.getAddress().getAddress().getHostAddress();
             plugin.getCore().getPendingLogins().remove(ip + username);
@@ -69,6 +71,7 @@ public class PlayerConnectionListener implements Listener {
             //bungeecord will do this automatically so override it on disabled option
             InitialHandler initialHandler = (InitialHandler) connection;
             if (!plugin.getConfig().getBoolean("premiumUuid")) {
+                plugin.getLogger().fine("OVERRIDING UUID");
                 try {
                     UUID offlineUUID = UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes(Charsets.UTF_8));
 
@@ -77,6 +80,7 @@ public class PlayerConnectionListener implements Listener {
                     Field idField = InitialHandler.class.getDeclaredField("uniqueId");
                     idField.setAccessible(true);
                     idField.set(connection, offlineUUID);
+                    plugin.getLogger().log(Level.FINE, "UUID OVERRIDEN {0}", offlineUUID);
                 } catch (NoSuchFieldException | IllegalAccessException ex) {
                     plugin.getLogger().log(Level.SEVERE, "Failed to set offline uuid", ex);
                 }
