@@ -8,19 +8,14 @@ language: java
 
 script: mvn compile test
 
-after_success: |
-  if [ -n "$GITHUB_API_KEY" ]; then
-    cd "$TRAVIS_BUILD_DIR"
-    # This generates a `web` directory containing the website.
-    make web
-    cd web
-    git init
-    git checkout -b gh-pages
-    git add .
-    git -c user.name='travis' -c user.email='travis' commit -m init
-    git push -f -q https://aloata:$GITHUB_API_KEY@github.com/aloata/fl1-gh-pages gh-pages &2>/dev/null
-    cd "$TRAVIS_BUILD_DIR"
-  fi
-
 # We run on 8
 jdk: [oraclejdk8]
+
+deploy:
+  provider: releases
+  api_key: ${api_key}
+  file: "build/libs/FastLogin1_.jar"
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: true
