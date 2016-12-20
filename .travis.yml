@@ -14,7 +14,7 @@ jdk: [oraclejdk8]
 deploy:
   provider: releases
   api_key: ${GITHUB_API_KEY}
-  file: "FastLogin1_.jar"
+  file: "FastLogin.jar"
   skip_cleanup: true
   on:
     repo: aloata/fl1
