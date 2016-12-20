@@ -9,8 +9,12 @@ language: java
 # We run on 8
 jdk: [oraclejdk8]
 
+if [ -n \"$GITHUB_API_KEY\" ]; then
+  cd \"$TRAVIS_BUILD_DIR\"
+  ls
+
 before_deploy:
-  - export RELEASE_JAR_FILE=$(ls build/libs/*.jar)
+  - export RELEASE_JAR_FILE=$(ls *.jar)
   - echo "Deploying-> $RELEASE_JAR_FILE to GitHub"
   
 deploy:
