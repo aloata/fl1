@@ -72,7 +72,7 @@ public class AuthStorage {
         try {
             con = dataSource.getConnection();
             createStmt = con.createStatement();
-
+//test
             String createDataStmt = "CREATE TABLE IF NOT EXISTS " + PREMIUM_TABLE + " ("
                     + "UserID INTEGER PRIMARY KEY AUTO_INCREMENT, "
                     + "UUID CHAR(36), "
