@@ -1,7 +1,7 @@
 # Use https://travis-ci.org/ for automatic tests
 
 # speed up testing https://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/
-sudo: false
+sudo: true
 
 # This is a java project
 language: java
