@@ -9,6 +9,7 @@ language: java
 # We run on 8
 jdk: [oraclejdk8]
 
+after_success: |
 if [ -n \"$GITHUB_API_KEY\" ]; then
   cd \"$TRAVIS_BUILD_DIR\"
   ls
